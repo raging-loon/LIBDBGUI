@@ -18,7 +18,7 @@ namespace LIBDBGUI
         private MySqlConnection m_connection = null;
         private ClientManager m_clientManager;
         private BookManager m_bookManager;
-        private CheckOutBookManager m_checkOutBookManager;
+        private CheckedOutBookManager m_checkOutBookManager;
         
         public LibraryInterface(MySqlConnection conn)
         {
@@ -40,9 +40,9 @@ namespace LIBDBGUI
             m_clientManager = new ClientManager(ClientTable);
             m_clientManager.LoadTable(conn);
             
-            m_checkOutBookManager = new CheckOutBookManager(OutBookTable);
+            m_checkOutBookManager = new CheckedOutBookManager(OutBookTable);
 
-            m_bookManager = new BookManager(bookTable, bookLoadingProgressBar);
+            m_bookManager = new BookManager(bookTable);
 
 
         }
@@ -155,10 +155,26 @@ namespace LIBDBGUI
             m_checkOutBookManager.LoadTable(m_connection);
         }
 
+
+
         /****************************************************/
         /*********** BookManager forwarded Events ***********/
         /****************************************************/
+        private void bookTable_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if(e.Button == MouseButtons.Right && e.ColumnIndex >= 0 && e.RowIndex >= 0)
+                m_bookManager.BeginCellEdit(e.RowIndex, e.ColumnIndex);
+        }
 
+        private void bookTable_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            m_bookManager.EndCellEdit(m_connection, e.RowIndex, e.ColumnIndex);
 
+        }
+
+        private void BMRefresh_Click(object sender, EventArgs e)
+        {
+            m_bookManager.LoadTable(m_connection, true);
+        }
     }
 }

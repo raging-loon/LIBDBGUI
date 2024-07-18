@@ -1,9 +1,11 @@
 ﻿using LIBDBGUI.ClientForms;
 using MySql.Data.MySqlClient;
 using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -41,9 +43,12 @@ namespace LIBDBGUI
         /// </summary>
         private CellEditState m_cellEditState;
 
+        private bool m_tableIsPopulated;
+
         public ClientManager(DataGridView view)
         {
             clientTable = view;
+            m_tableIsPopulated = false;
         }
 
         /// <summary>
@@ -53,7 +58,8 @@ namespace LIBDBGUI
         /// <param name="conn">MySQL Connection</param>
         public void LoadTable(MySqlConnection conn)
         {
-
+            if (m_tableIsPopulated)
+                return;
             Debug.Assert(conn.State == System.Data.ConnectionState.Open);
          
 
@@ -66,7 +72,7 @@ namespace LIBDBGUI
             DisplayQueryResult(reader);
 
             reader.Close();
-
+            m_tableIsPopulated = true;
         }
         /// <summary>
         /// Populate clientTable with info from a query
@@ -122,7 +128,8 @@ namespace LIBDBGUI
         {
             NewClientForm ncf = new NewClientForm();
             ncf.ShowDialog();
-
+            if (!ncf.WasSubmitted)
+                return;
             MySqlCommand insertNewUserCommand = new MySqlCommand();
             insertNewUserCommand.Connection = conn;
             
@@ -134,6 +141,7 @@ namespace LIBDBGUI
 
             int rowsAffected = insertNewUserCommand.ExecuteNonQuery();
 
+            m_tableIsPopulated = false;
 
             LoadTable(conn);
         }
@@ -157,6 +165,8 @@ namespace LIBDBGUI
                     $"DELETE FROM _client WHERE( client_id = {clientID} AND client_name = '{clientName}');";
 
                 int rowsAffected = deleteUserCommand.ExecuteNonQuery();
+                m_tableIsPopulated = false;
+
                 LoadTable(connection);
             }
 
@@ -165,6 +175,7 @@ namespace LIBDBGUI
 
         public void RefreshButtonPressed(MySqlConnection connection, object sender, EventArgs e)
         {
+            m_tableIsPopulated = false;
             LoadTable(connection);
         }
 
@@ -253,7 +264,10 @@ namespace LIBDBGUI
                 );
 
                 if(update.update(conn))
+                {
+                    m_tableIsPopulated = false;
                     LoadTable(conn);
+                }
                 else
                 {
                     MessageBox.Show(

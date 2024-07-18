@@ -22,6 +22,8 @@ namespace LIBDBGUI
         private string m_primaryKeyName;
         private int    m_primaryKey;
 
+        public string LastError { get; private set; }
+
         /// <summary>
         /// 
         /// </summary>
@@ -39,7 +41,13 @@ namespace LIBDBGUI
             m_primaryKey = pkVal;
         }
 
-
+        /// <summary>
+        /// Update the table
+        /// 
+        /// If it failed, check DatabaseTableUpdate.LastError
+        /// 
+        /// </summary>
+        /// <returns>True if the Update was successful</returns>
         public bool update(MySqlConnection connection)
         {
             Debug.Assert(connection != null && connection.State == System.Data.ConnectionState.Open);
@@ -48,8 +56,21 @@ namespace LIBDBGUI
             updateCmd.Connection = connection;
             updateCmd.CommandText =
                 $"UPDATE {m_tableName} SET {m_fieldName} = {m_newValue} WHERE {m_primaryKeyName} = {m_primaryKey}";
-        
-            return updateCmd.ExecuteNonQuery() == 1;
+
+            int rowsEffected;
+
+            try
+            {
+                rowsEffected = updateCmd.ExecuteNonQuery();
+
+                return rowsEffected == 1;
+            }
+            catch (Exception ex)
+            {
+                LastError = ex.Message;
+                return false;
+            }
+
         }
 
     }

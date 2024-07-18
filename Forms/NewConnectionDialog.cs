@@ -42,6 +42,8 @@ namespace LIBDBGUI
             get { return ((int)ncdPortNupDown.Value); }
         }
 
+
+
         // evoked when this dialog closes
         //public event DialogClosed;
         public NewConnectionDialog()

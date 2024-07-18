@@ -9,11 +9,11 @@ using System.Windows.Forms;
 
 namespace LIBDBGUI
 {
-    internal class CheckOutBookManager
+    internal class CheckedOutBookManager
     {
         private DataGridView m_cobTable;
 
-        public CheckOutBookManager(DataGridView cobTable)
+        public CheckedOutBookManager(DataGridView cobTable)
         {
             m_cobTable = cobTable;
         }
