@@ -84,7 +84,7 @@ namespace LIBDBGUI
             if (!rf.WasSubmitted)
                 return;
 
-            ReturnManager rm = new ReturnManager(rf.GetISBNs().ToArray(), rf.ClientID);
+            ReturnManager rm = new ReturnManager(rf.GetISBNs(), rf.ClientID);
             rm.doReturn(m_connection);
             
         }
@@ -99,6 +99,13 @@ namespace LIBDBGUI
                 case 2: m_checkOutBookManager.LoadTable(m_connection); break;
             }
         }
+
+        private void HelpButton_Click(object sender, EventArgs e)
+        {
+            Forms.HelpForm hf = new Forms.HelpForm();
+            hf.Show();
+        }
+
         /***********************************************************/
         /*********** LibraryInterface Intercepted Events ***********/
         /***********************************************************/
@@ -240,6 +247,6 @@ namespace LIBDBGUI
                 m_bookManager.SearchByAuthor(m_connection, BookSearchTextBox.Text);
         }
 
-  
+        
     }
 }

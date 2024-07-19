@@ -10,10 +10,10 @@ namespace LIBDBGUI.BookManagement
   
     internal class ReturnManager
     {
-        private string[] m_isbnList;
-        private int m_clientID;
+        private readonly List<string> m_isbnList;
+        private readonly int m_clientID;
 
-        public ReturnManager(string[] isbns, int clientID)
+        public ReturnManager(List<string> isbns, int clientID)
         {
             m_isbnList = isbns;
             m_clientID = clientID;

@@ -79,6 +79,7 @@
             this.ReturnBooksButton = new System.Windows.Forms.ToolStripButton();
             this.ClientsViewCheckedOutBooksButton = new System.Windows.Forms.ToolStripButton();
             this.BookSearchViewClientsButton = new System.Windows.Forms.ToolStripButton();
+            this.HelpButton = new System.Windows.Forms.ToolStripButton();
             this.LibraryTabs.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ClientTable)).BeginInit();
@@ -217,7 +218,7 @@
             this.ClientDeleteButton.Image = ((System.Drawing.Image)(resources.GetObject("ClientDeleteButton.Image")));
             this.ClientDeleteButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.ClientDeleteButton.Name = "ClientDeleteButton";
-            this.ClientDeleteButton.Size = new System.Drawing.Size(57, 36);
+            this.ClientDeleteButton.Size = new System.Drawing.Size(57, 24);
             this.ClientDeleteButton.Text = "Delete";
             this.ClientDeleteButton.Click += new System.EventHandler(this.ClientDeleteButton_Click);
             // 
@@ -230,7 +231,7 @@
             this.ClientSearchDropDown.Image = ((System.Drawing.Image)(resources.GetObject("ClientSearchDropDown.Image")));
             this.ClientSearchDropDown.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.ClientSearchDropDown.Name = "ClientSearchDropDown";
-            this.ClientSearchDropDown.Size = new System.Drawing.Size(67, 36);
+            this.ClientSearchDropDown.Size = new System.Drawing.Size(67, 24);
             this.ClientSearchDropDown.Text = "Search";
             // 
             // ClientSearchByID
@@ -251,7 +252,7 @@
             // 
             this.ClientSearchBox.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.ClientSearchBox.Name = "ClientSearchBox";
-            this.ClientSearchBox.Size = new System.Drawing.Size(100, 39);
+            this.ClientSearchBox.Size = new System.Drawing.Size(100, 27);
             // 
             // ClientTableRefreshButton
             // 
@@ -259,7 +260,7 @@
             this.ClientTableRefreshButton.Image = ((System.Drawing.Image)(resources.GetObject("ClientTableRefreshButton.Image")));
             this.ClientTableRefreshButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.ClientTableRefreshButton.Name = "ClientTableRefreshButton";
-            this.ClientTableRefreshButton.Size = new System.Drawing.Size(62, 36);
+            this.ClientTableRefreshButton.Size = new System.Drawing.Size(62, 24);
             this.ClientTableRefreshButton.Text = "Refresh";
             this.ClientTableRefreshButton.Click += new System.EventHandler(this.ClientTableRefreshButton_Click);
             // 
@@ -379,7 +380,7 @@
             this.BMRefresh.Image = ((System.Drawing.Image)(resources.GetObject("BMRefresh.Image")));
             this.BMRefresh.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.BMRefresh.Name = "BMRefresh";
-            this.BMRefresh.Size = new System.Drawing.Size(62, 36);
+            this.BMRefresh.Size = new System.Drawing.Size(62, 24);
             this.BMRefresh.Text = "Refresh";
             this.BMRefresh.Click += new System.EventHandler(this.BMRefresh_Click);
             // 
@@ -389,7 +390,7 @@
             this.toolStripButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton2.Image")));
             this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton2.Name = "toolStripButton2";
-            this.toolStripButton2.Size = new System.Drawing.Size(43, 36);
+            this.toolStripButton2.Size = new System.Drawing.Size(43, 24);
             this.toolStripButton2.Text = "New";
             // 
             // toolStripButton3
@@ -398,7 +399,7 @@
             this.toolStripButton3.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton3.Image")));
             this.toolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton3.Name = "toolStripButton3";
-            this.toolStripButton3.Size = new System.Drawing.Size(57, 36);
+            this.toolStripButton3.Size = new System.Drawing.Size(57, 24);
             this.toolStripButton3.Text = "Delete";
             // 
             // BMSearch
@@ -411,7 +412,7 @@
             this.BMSearch.Image = ((System.Drawing.Image)(resources.GetObject("BMSearch.Image")));
             this.BMSearch.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.BMSearch.Name = "BMSearch";
-            this.BMSearch.Size = new System.Drawing.Size(67, 36);
+            this.BMSearch.Size = new System.Drawing.Size(67, 24);
             this.BMSearch.Text = "Search";
             // 
             // BookSearchByName
@@ -439,7 +440,7 @@
             // 
             this.BookSearchTextBox.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.BookSearchTextBox.Name = "BookSearchTextBox";
-            this.BookSearchTextBox.Size = new System.Drawing.Size(76, 39);
+            this.BookSearchTextBox.Size = new System.Drawing.Size(76, 27);
             // 
             // CheckedOutBooksTab
             // 
@@ -532,10 +533,11 @@
             this.toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.checkOutButton,
-            this.ReturnBooksButton});
+            this.ReturnBooksButton,
+            this.HelpButton});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(1192, 27);
+            this.toolStrip1.Size = new System.Drawing.Size(1490, 39);
             this.toolStrip1.TabIndex = 4;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -545,7 +547,7 @@
             this.checkOutButton.Image = ((System.Drawing.Image)(resources.GetObject("checkOutButton.Image")));
             this.checkOutButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.checkOutButton.Name = "checkOutButton";
-            this.checkOutButton.Size = new System.Drawing.Size(80, 24);
+            this.checkOutButton.Size = new System.Drawing.Size(80, 36);
             this.checkOutButton.Text = "Check Out";
             this.checkOutButton.Click += new System.EventHandler(this.checkOutButton_Click);
             // 
@@ -555,7 +557,7 @@
             this.ReturnBooksButton.Image = ((System.Drawing.Image)(resources.GetObject("ReturnBooksButton.Image")));
             this.ReturnBooksButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.ReturnBooksButton.Name = "ReturnBooksButton";
-            this.ReturnBooksButton.Size = new System.Drawing.Size(100, 24);
+            this.ReturnBooksButton.Size = new System.Drawing.Size(100, 36);
             this.ReturnBooksButton.Text = "Return Books";
             this.ReturnBooksButton.Click += new System.EventHandler(this.ReturnBooksButton_Click);
             // 
@@ -565,7 +567,7 @@
             this.ClientsViewCheckedOutBooksButton.Image = ((System.Drawing.Image)(resources.GetObject("ClientsViewCheckedOutBooksButton.Image")));
             this.ClientsViewCheckedOutBooksButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.ClientsViewCheckedOutBooksButton.Name = "ClientsViewCheckedOutBooksButton";
-            this.ClientsViewCheckedOutBooksButton.Size = new System.Drawing.Size(141, 36);
+            this.ClientsViewCheckedOutBooksButton.Size = new System.Drawing.Size(141, 24);
             this.ClientsViewCheckedOutBooksButton.Text = "Checked Out Books";
             this.ClientsViewCheckedOutBooksButton.Click += new System.EventHandler(this.ClientsViewCheckedOutBooksButton_Click);
             // 
@@ -575,9 +577,20 @@
             this.BookSearchViewClientsButton.Image = ((System.Drawing.Image)(resources.GetObject("BookSearchViewClientsButton.Image")));
             this.BookSearchViewClientsButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.BookSearchViewClientsButton.Name = "BookSearchViewClientsButton";
-            this.BookSearchViewClientsButton.Size = new System.Drawing.Size(93, 36);
+            this.BookSearchViewClientsButton.Size = new System.Drawing.Size(93, 24);
             this.BookSearchViewClientsButton.Text = "View Clients";
             this.BookSearchViewClientsButton.Click += new System.EventHandler(this.BookSearchViewClientsButton_Click);
+            // 
+            // HelpButton
+            // 
+            this.HelpButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.HelpButton.Image = ((System.Drawing.Image)(resources.GetObject("HelpButton.Image")));
+            this.HelpButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.HelpButton.Name = "HelpButton";
+            this.HelpButton.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.HelpButton.Size = new System.Drawing.Size(45, 36);
+            this.HelpButton.Text = "Help";
+            this.HelpButton.Click += new System.EventHandler(this.HelpButton_Click);
             // 
             // LibraryInterface
             // 
@@ -663,5 +676,6 @@
         private System.Windows.Forms.ToolStripButton ReturnBooksButton;
         private System.Windows.Forms.ToolStripButton ClientsViewCheckedOutBooksButton;
         private System.Windows.Forms.ToolStripButton BookSearchViewClientsButton;
+        private System.Windows.Forms.ToolStripButton HelpButton;
     }
 }

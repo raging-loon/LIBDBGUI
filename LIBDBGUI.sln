@@ -5,6 +5,8 @@ VisualStudioVersion = 17.10.35027.167
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LIBDBGUI", "LIBDBGUI.csproj", "{4F7022C2-C774-427D-AF36-8838A0544FDC}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Installer", "Installer\Installer.vdproj", "{C928B135-54F7-4B5C-B86E-23993991881B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,8 @@ Global
 		{4F7022C2-C774-427D-AF36-8838A0544FDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4F7022C2-C774-427D-AF36-8838A0544FDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4F7022C2-C774-427D-AF36-8838A0544FDC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C928B135-54F7-4B5C-B86E-23993991881B}.Debug|Any CPU.ActiveCfg = Debug
+		{C928B135-54F7-4B5C-B86E-23993991881B}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
