@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LibraryInterface));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.LibraryTabs = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.ClientTable = new System.Windows.Forms.DataGridView();
@@ -56,9 +56,16 @@
             this.publish_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.num_copies = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.num_copies_out = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.toolStrip3 = new System.Windows.Forms.ToolStrip();
+            this.tooltip = new System.Windows.Forms.ToolStrip();
             this.BMRefresh = new System.Windows.Forms.ToolStripButton();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
+            this.BMSearch = new System.Windows.Forms.ToolStripDropDownButton();
+            this.BookSearchByName = new System.Windows.Forms.ToolStripMenuItem();
+            this.BookSearchISBN = new System.Windows.Forms.ToolStripMenuItem();
+            this.BookSearchAuthor = new System.Windows.Forms.ToolStripMenuItem();
+            this.BookSearchTextBox = new System.Windows.Forms.ToolStripTextBox();
+            this.CheckedOutBooksTab = new System.Windows.Forms.TabPage();
             this.OutBookTable = new System.Windows.Forms.DataGridView();
             this.BookIDCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CheckOutDateCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -67,20 +74,19 @@
             this.ClientNameCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
             this.OutBooksRefreshButton = new System.Windows.Forms.ToolStripButton();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.checkOutButton = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
-            this.BMSearch = new System.Windows.Forms.ToolStripButton();
+            this.ReturnBooksButton = new System.Windows.Forms.ToolStripButton();
+            this.ClientsViewCheckedOutBooksButton = new System.Windows.Forms.ToolStripButton();
+            this.BookSearchViewClientsButton = new System.Windows.Forms.ToolStripButton();
             this.LibraryTabs.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ClientTable)).BeginInit();
             this.Client.SuspendLayout();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bookTable)).BeginInit();
-            this.toolStrip3.SuspendLayout();
-            this.tabPage3.SuspendLayout();
+            this.tooltip.SuspendLayout();
+            this.CheckedOutBooksTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.OutBookTable)).BeginInit();
             this.toolStrip2.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -93,13 +99,12 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.LibraryTabs.Controls.Add(this.tabPage1);
             this.LibraryTabs.Controls.Add(this.tabPage2);
-            this.LibraryTabs.Controls.Add(this.tabPage3);
-            this.LibraryTabs.Location = new System.Drawing.Point(193, 38);
-            this.LibraryTabs.Margin = new System.Windows.Forms.Padding(4);
+            this.LibraryTabs.Controls.Add(this.CheckedOutBooksTab);
+            this.LibraryTabs.Location = new System.Drawing.Point(143, 30);
             this.LibraryTabs.Multiline = true;
             this.LibraryTabs.Name = "LibraryTabs";
             this.LibraryTabs.SelectedIndex = 0;
-            this.LibraryTabs.Size = new System.Drawing.Size(1363, 825);
+            this.LibraryTabs.Size = new System.Drawing.Size(1037, 680);
             this.LibraryTabs.TabIndex = 1;
             this.LibraryTabs.Selected += new System.Windows.Forms.TabControlEventHandler(this.LibraryTabs_Selected);
             // 
@@ -107,11 +112,10 @@
             // 
             this.tabPage1.Controls.Add(this.ClientTable);
             this.tabPage1.Controls.Add(this.Client);
-            this.tabPage1.Location = new System.Drawing.Point(4, 25);
-            this.tabPage1.Margin = new System.Windows.Forms.Padding(4);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(4);
-            this.tabPage1.Size = new System.Drawing.Size(1355, 796);
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(1029, 654);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Clients";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -130,13 +134,12 @@
             this.c_is_student});
             this.ClientTable.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ClientTable.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.ClientTable.Location = new System.Drawing.Point(4, 31);
-            this.ClientTable.Margin = new System.Windows.Forms.Padding(4);
+            this.ClientTable.Location = new System.Drawing.Point(3, 30);
             this.ClientTable.MultiSelect = false;
             this.ClientTable.Name = "ClientTable";
             this.ClientTable.RowHeadersWidth = 51;
             this.ClientTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.ClientTable.Size = new System.Drawing.Size(1347, 761);
+            this.ClientTable.Size = new System.Drawing.Size(1023, 621);
             this.ClientTable.TabIndex = 1;
             this.ClientTable.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.ClientTable_CellEndEdit);
             this.ClientTable.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.ClientTable_CellMouseClick);
@@ -190,10 +193,11 @@
             this.ClientDeleteButton,
             this.ClientSearchDropDown,
             this.ClientSearchBox,
-            this.ClientTableRefreshButton});
-            this.Client.Location = new System.Drawing.Point(4, 4);
+            this.ClientTableRefreshButton,
+            this.ClientsViewCheckedOutBooksButton});
+            this.Client.Location = new System.Drawing.Point(3, 3);
             this.Client.Name = "Client";
-            this.Client.Size = new System.Drawing.Size(1347, 27);
+            this.Client.Size = new System.Drawing.Size(1023, 27);
             this.Client.TabIndex = 0;
             this.Client.Text = "toolStrip2";
             // 
@@ -213,7 +217,7 @@
             this.ClientDeleteButton.Image = ((System.Drawing.Image)(resources.GetObject("ClientDeleteButton.Image")));
             this.ClientDeleteButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.ClientDeleteButton.Name = "ClientDeleteButton";
-            this.ClientDeleteButton.Size = new System.Drawing.Size(57, 24);
+            this.ClientDeleteButton.Size = new System.Drawing.Size(57, 36);
             this.ClientDeleteButton.Text = "Delete";
             this.ClientDeleteButton.Click += new System.EventHandler(this.ClientDeleteButton_Click);
             // 
@@ -226,20 +230,20 @@
             this.ClientSearchDropDown.Image = ((System.Drawing.Image)(resources.GetObject("ClientSearchDropDown.Image")));
             this.ClientSearchDropDown.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.ClientSearchDropDown.Name = "ClientSearchDropDown";
-            this.ClientSearchDropDown.Size = new System.Drawing.Size(67, 24);
+            this.ClientSearchDropDown.Size = new System.Drawing.Size(67, 36);
             this.ClientSearchDropDown.Text = "Search";
             // 
             // ClientSearchByID
             // 
             this.ClientSearchByID.Name = "ClientSearchByID";
-            this.ClientSearchByID.Size = new System.Drawing.Size(152, 26);
+            this.ClientSearchByID.Size = new System.Drawing.Size(224, 26);
             this.ClientSearchByID.Text = "By ID";
             this.ClientSearchByID.Click += new System.EventHandler(this.ClientSearchByID_Click);
             // 
             // ClientSearchByName
             // 
             this.ClientSearchByName.Name = "ClientSearchByName";
-            this.ClientSearchByName.Size = new System.Drawing.Size(152, 26);
+            this.ClientSearchByName.Size = new System.Drawing.Size(224, 26);
             this.ClientSearchByName.Text = "By Name";
             this.ClientSearchByName.Click += new System.EventHandler(this.ClientSearchByName_Click);
             // 
@@ -247,7 +251,7 @@
             // 
             this.ClientSearchBox.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.ClientSearchBox.Name = "ClientSearchBox";
-            this.ClientSearchBox.Size = new System.Drawing.Size(132, 27);
+            this.ClientSearchBox.Size = new System.Drawing.Size(100, 39);
             // 
             // ClientTableRefreshButton
             // 
@@ -255,19 +259,18 @@
             this.ClientTableRefreshButton.Image = ((System.Drawing.Image)(resources.GetObject("ClientTableRefreshButton.Image")));
             this.ClientTableRefreshButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.ClientTableRefreshButton.Name = "ClientTableRefreshButton";
-            this.ClientTableRefreshButton.Size = new System.Drawing.Size(62, 24);
+            this.ClientTableRefreshButton.Size = new System.Drawing.Size(62, 36);
             this.ClientTableRefreshButton.Text = "Refresh";
             this.ClientTableRefreshButton.Click += new System.EventHandler(this.ClientTableRefreshButton_Click);
             // 
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.bookTable);
-            this.tabPage2.Controls.Add(this.toolStrip3);
-            this.tabPage2.Location = new System.Drawing.Point(4, 25);
-            this.tabPage2.Margin = new System.Windows.Forms.Padding(4);
+            this.tabPage2.Controls.Add(this.tooltip);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(4);
-            this.tabPage2.Size = new System.Drawing.Size(1355, 796);
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(1029, 654);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Book Search";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -288,11 +291,10 @@
             this.num_copies_out});
             this.bookTable.Dock = System.Windows.Forms.DockStyle.Fill;
             this.bookTable.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.bookTable.Location = new System.Drawing.Point(4, 31);
-            this.bookTable.Margin = new System.Windows.Forms.Padding(4);
+            this.bookTable.Location = new System.Drawing.Point(3, 30);
             this.bookTable.Name = "bookTable";
             this.bookTable.RowHeadersWidth = 51;
-            this.bookTable.Size = new System.Drawing.Size(1347, 761);
+            this.bookTable.Size = new System.Drawing.Size(1023, 621);
             this.bookTable.TabIndex = 1;
             this.bookTable.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.bookTable_CellEndEdit);
             this.bookTable.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.bookTable_CellMouseClick);
@@ -335,6 +337,8 @@
             // publish_date
             // 
             this.publish_date.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewCellStyle2.Format = "MM/dd/yyyy";
+            this.publish_date.DefaultCellStyle = dataGridViewCellStyle2;
             this.publish_date.HeaderText = "Date Published";
             this.publish_date.MinimumWidth = 6;
             this.publish_date.Name = "publish_date";
@@ -353,19 +357,21 @@
             this.num_copies_out.MinimumWidth = 6;
             this.num_copies_out.Name = "num_copies_out";
             // 
-            // toolStrip3
+            // tooltip
             // 
-            this.toolStrip3.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.toolStrip3.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tooltip.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.tooltip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.BMRefresh,
             this.toolStripButton2,
             this.toolStripButton3,
-            this.BMSearch});
-            this.toolStrip3.Location = new System.Drawing.Point(4, 4);
-            this.toolStrip3.Name = "toolStrip3";
-            this.toolStrip3.Size = new System.Drawing.Size(1347, 27);
-            this.toolStrip3.TabIndex = 0;
-            this.toolStrip3.Text = "toolStrip3";
+            this.BMSearch,
+            this.BookSearchTextBox,
+            this.BookSearchViewClientsButton});
+            this.tooltip.Location = new System.Drawing.Point(3, 3);
+            this.tooltip.Name = "tooltip";
+            this.tooltip.Size = new System.Drawing.Size(1023, 27);
+            this.tooltip.TabIndex = 0;
+            this.tooltip.Text = "toolStrip3";
             // 
             // BMRefresh
             // 
@@ -373,22 +379,79 @@
             this.BMRefresh.Image = ((System.Drawing.Image)(resources.GetObject("BMRefresh.Image")));
             this.BMRefresh.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.BMRefresh.Name = "BMRefresh";
-            this.BMRefresh.Size = new System.Drawing.Size(62, 24);
+            this.BMRefresh.Size = new System.Drawing.Size(62, 36);
             this.BMRefresh.Text = "Refresh";
             this.BMRefresh.Click += new System.EventHandler(this.BMRefresh_Click);
             // 
-            // tabPage3
+            // toolStripButton2
             // 
-            this.tabPage3.Controls.Add(this.OutBookTable);
-            this.tabPage3.Controls.Add(this.toolStrip2);
-            this.tabPage3.Location = new System.Drawing.Point(4, 25);
-            this.tabPage3.Margin = new System.Windows.Forms.Padding(4);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(4);
-            this.tabPage3.Size = new System.Drawing.Size(1355, 796);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "Checked Out Books";
-            this.tabPage3.UseVisualStyleBackColor = true;
+            this.toolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton2.Image")));
+            this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton2.Name = "toolStripButton2";
+            this.toolStripButton2.Size = new System.Drawing.Size(43, 36);
+            this.toolStripButton2.Text = "New";
+            // 
+            // toolStripButton3
+            // 
+            this.toolStripButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripButton3.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton3.Image")));
+            this.toolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton3.Name = "toolStripButton3";
+            this.toolStripButton3.Size = new System.Drawing.Size(57, 36);
+            this.toolStripButton3.Text = "Delete";
+            // 
+            // BMSearch
+            // 
+            this.BMSearch.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.BMSearch.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.BookSearchByName,
+            this.BookSearchISBN,
+            this.BookSearchAuthor});
+            this.BMSearch.Image = ((System.Drawing.Image)(resources.GetObject("BMSearch.Image")));
+            this.BMSearch.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.BMSearch.Name = "BMSearch";
+            this.BMSearch.Size = new System.Drawing.Size(67, 36);
+            this.BMSearch.Text = "Search";
+            // 
+            // BookSearchByName
+            // 
+            this.BookSearchByName.Name = "BookSearchByName";
+            this.BookSearchByName.Size = new System.Drawing.Size(157, 26);
+            this.BookSearchByName.Text = "By Name";
+            this.BookSearchByName.Click += new System.EventHandler(this.BookSearchByName_Click);
+            // 
+            // BookSearchISBN
+            // 
+            this.BookSearchISBN.Name = "BookSearchISBN";
+            this.BookSearchISBN.Size = new System.Drawing.Size(157, 26);
+            this.BookSearchISBN.Text = "By ISBN";
+            this.BookSearchISBN.Click += new System.EventHandler(this.BookSearchISBN_Click);
+            // 
+            // BookSearchAuthor
+            // 
+            this.BookSearchAuthor.Name = "BookSearchAuthor";
+            this.BookSearchAuthor.Size = new System.Drawing.Size(157, 26);
+            this.BookSearchAuthor.Text = "By Author";
+            this.BookSearchAuthor.Click += new System.EventHandler(this.BookSearchAuthor_Click);
+            // 
+            // BookSearchTextBox
+            // 
+            this.BookSearchTextBox.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.BookSearchTextBox.Name = "BookSearchTextBox";
+            this.BookSearchTextBox.Size = new System.Drawing.Size(76, 39);
+            // 
+            // CheckedOutBooksTab
+            // 
+            this.CheckedOutBooksTab.Controls.Add(this.OutBookTable);
+            this.CheckedOutBooksTab.Controls.Add(this.toolStrip2);
+            this.CheckedOutBooksTab.Location = new System.Drawing.Point(4, 22);
+            this.CheckedOutBooksTab.Name = "CheckedOutBooksTab";
+            this.CheckedOutBooksTab.Padding = new System.Windows.Forms.Padding(3);
+            this.CheckedOutBooksTab.Size = new System.Drawing.Size(1029, 654);
+            this.CheckedOutBooksTab.TabIndex = 2;
+            this.CheckedOutBooksTab.Text = "Checked Out Books";
+            this.CheckedOutBooksTab.UseVisualStyleBackColor = true;
             // 
             // OutBookTable
             // 
@@ -402,11 +465,10 @@
             this.BookNameCol,
             this.ClientNameCol});
             this.OutBookTable.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.OutBookTable.Location = new System.Drawing.Point(4, 31);
-            this.OutBookTable.Margin = new System.Windows.Forms.Padding(4);
+            this.OutBookTable.Location = new System.Drawing.Point(3, 30);
             this.OutBookTable.Name = "OutBookTable";
             this.OutBookTable.RowHeadersWidth = 51;
-            this.OutBookTable.Size = new System.Drawing.Size(1347, 761);
+            this.OutBookTable.Size = new System.Drawing.Size(1023, 621);
             this.OutBookTable.TabIndex = 1;
             // 
             // BookIDCol
@@ -449,9 +511,9 @@
             this.toolStrip2.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.OutBooksRefreshButton});
-            this.toolStrip2.Location = new System.Drawing.Point(4, 4);
+            this.toolStrip2.Location = new System.Drawing.Point(3, 3);
             this.toolStrip2.Name = "toolStrip2";
-            this.toolStrip2.Size = new System.Drawing.Size(1347, 27);
+            this.toolStrip2.Size = new System.Drawing.Size(1023, 27);
             this.toolStrip2.TabIndex = 0;
             this.toolStrip2.Text = "toolStrip2";
             // 
@@ -465,20 +527,15 @@
             this.OutBooksRefreshButton.Text = "Refresh";
             this.OutBooksRefreshButton.Click += new System.EventHandler(this.OutBooksRefreshButton_Click);
             // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
-            // 
             // toolStrip1
             // 
             this.toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.checkOutButton});
+            this.checkOutButton,
+            this.ReturnBooksButton});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(1589, 27);
+            this.toolStrip1.Size = new System.Drawing.Size(1192, 27);
             this.toolStrip1.TabIndex = 4;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -492,41 +549,44 @@
             this.checkOutButton.Text = "Check Out";
             this.checkOutButton.Click += new System.EventHandler(this.checkOutButton_Click);
             // 
-            // toolStripButton2
+            // ReturnBooksButton
             // 
-            this.toolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton2.Image")));
-            this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton2.Name = "toolStripButton2";
-            this.toolStripButton2.Size = new System.Drawing.Size(43, 24);
-            this.toolStripButton2.Text = "New";
+            this.ReturnBooksButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.ReturnBooksButton.Image = ((System.Drawing.Image)(resources.GetObject("ReturnBooksButton.Image")));
+            this.ReturnBooksButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ReturnBooksButton.Name = "ReturnBooksButton";
+            this.ReturnBooksButton.Size = new System.Drawing.Size(100, 24);
+            this.ReturnBooksButton.Text = "Return Books";
+            this.ReturnBooksButton.Click += new System.EventHandler(this.ReturnBooksButton_Click);
             // 
-            // toolStripButton3
+            // ClientsViewCheckedOutBooksButton
             // 
-            this.toolStripButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripButton3.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton3.Image")));
-            this.toolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton3.Name = "toolStripButton3";
-            this.toolStripButton3.Size = new System.Drawing.Size(57, 24);
-            this.toolStripButton3.Text = "Delete";
+            this.ClientsViewCheckedOutBooksButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.ClientsViewCheckedOutBooksButton.Image = ((System.Drawing.Image)(resources.GetObject("ClientsViewCheckedOutBooksButton.Image")));
+            this.ClientsViewCheckedOutBooksButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ClientsViewCheckedOutBooksButton.Name = "ClientsViewCheckedOutBooksButton";
+            this.ClientsViewCheckedOutBooksButton.Size = new System.Drawing.Size(141, 36);
+            this.ClientsViewCheckedOutBooksButton.Text = "Checked Out Books";
+            this.ClientsViewCheckedOutBooksButton.Click += new System.EventHandler(this.ClientsViewCheckedOutBooksButton_Click);
             // 
-            // BMSearch
+            // BookSearchViewClientsButton
             // 
-            this.BMSearch.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.BMSearch.Image = ((System.Drawing.Image)(resources.GetObject("BMSearch.Image")));
-            this.BMSearch.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.BMSearch.Name = "BMSearch";
-            this.BMSearch.Size = new System.Drawing.Size(57, 24);
-            this.BMSearch.Text = "Search";
+            this.BookSearchViewClientsButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.BookSearchViewClientsButton.Image = ((System.Drawing.Image)(resources.GetObject("BookSearchViewClientsButton.Image")));
+            this.BookSearchViewClientsButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.BookSearchViewClientsButton.Name = "BookSearchViewClientsButton";
+            this.BookSearchViewClientsButton.Size = new System.Drawing.Size(93, 36);
+            this.BookSearchViewClientsButton.Text = "View Clients";
+            this.BookSearchViewClientsButton.Click += new System.EventHandler(this.BookSearchViewClientsButton_Click);
             // 
             // LibraryInterface
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1589, 876);
+            this.ClientSize = new System.Drawing.Size(1192, 712);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.LibraryTabs);
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "LibraryInterface";
             this.Text = "LibraryInterface";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
@@ -539,10 +599,10 @@
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bookTable)).EndInit();
-            this.toolStrip3.ResumeLayout(false);
-            this.toolStrip3.PerformLayout();
-            this.tabPage3.ResumeLayout(false);
-            this.tabPage3.PerformLayout();
+            this.tooltip.ResumeLayout(false);
+            this.tooltip.PerformLayout();
+            this.CheckedOutBooksTab.ResumeLayout(false);
+            this.CheckedOutBooksTab.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.OutBookTable)).EndInit();
             this.toolStrip2.ResumeLayout(false);
             this.toolStrip2.PerformLayout();
@@ -556,7 +616,6 @@
         #endregion
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton checkOutButton;
         private System.Windows.Forms.ToolStrip Client;
@@ -569,7 +628,7 @@
         private System.Windows.Forms.ToolStripMenuItem ClientSearchByID;
         private System.Windows.Forms.ToolStripMenuItem ClientSearchByName;
         private System.Windows.Forms.ToolStripDropDownButton ClientSearchDropDown;
-        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.TabPage CheckedOutBooksTab;
         private System.Windows.Forms.ToolStrip toolStrip2;
         private System.Windows.Forms.DataGridView OutBookTable;
         private System.Windows.Forms.DataGridViewTextBoxColumn BookIDCol;
@@ -584,7 +643,10 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn client_fines;
         private System.Windows.Forms.DataGridViewTextBoxColumn c_is_student;
         private System.Windows.Forms.DataGridView bookTable;
-        private System.Windows.Forms.ToolStrip toolStrip3;
+        private System.Windows.Forms.ToolStrip tooltip;
+        private System.Windows.Forms.ToolStripButton BMRefresh;
+        private System.Windows.Forms.ToolStripButton toolStripButton2;
+        private System.Windows.Forms.ToolStripButton toolStripButton3;
         private System.Windows.Forms.DataGridViewTextBoxColumn book_id;
         private System.Windows.Forms.DataGridViewTextBoxColumn book_isbn;
         private System.Windows.Forms.DataGridViewTextBoxColumn book_name;
@@ -593,9 +655,13 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn publish_date;
         private System.Windows.Forms.DataGridViewTextBoxColumn num_copies;
         private System.Windows.Forms.DataGridViewTextBoxColumn num_copies_out;
-        private System.Windows.Forms.ToolStripButton BMRefresh;
-        private System.Windows.Forms.ToolStripButton toolStripButton2;
-        private System.Windows.Forms.ToolStripButton toolStripButton3;
-        private System.Windows.Forms.ToolStripButton BMSearch;
+        private System.Windows.Forms.ToolStripDropDownButton BMSearch;
+        private System.Windows.Forms.ToolStripMenuItem BookSearchByName;
+        private System.Windows.Forms.ToolStripMenuItem BookSearchISBN;
+        private System.Windows.Forms.ToolStripMenuItem BookSearchAuthor;
+        private System.Windows.Forms.ToolStripTextBox BookSearchTextBox;
+        private System.Windows.Forms.ToolStripButton ReturnBooksButton;
+        private System.Windows.Forms.ToolStripButton ClientsViewCheckedOutBooksButton;
+        private System.Windows.Forms.ToolStripButton BookSearchViewClientsButton;
     }
 }

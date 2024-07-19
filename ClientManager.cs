@@ -102,22 +102,7 @@ namespace LIBDBGUI
 
         }
 
-        /// <summary>
-        /// Executes a SQL Query
-        /// </summary>
-        /// <param name="conn">The connection</param>
-        /// <param name="cmd">Command</param>
-        /// <returns>A Reader so returned values can be read</returns>
-        public MySqlDataReader executeQuery(MySqlConnection conn, string cmd)
-        {
-            MySqlCommand command = new MySqlCommand();
-            command.Connection = conn;
-            command.CommandText = cmd;
-
-            MySqlDataReader reader = command.ExecuteReader();
-
-            return reader;
-        }
+     
 
         /***********************************************/
         /******* LibraryInterface event handlers *******/
@@ -181,7 +166,7 @@ namespace LIBDBGUI
 
         public void SearchByIDWasPressed(MySqlConnection connection, int ID)
         {
-            MySqlDataReader reader = executeQuery(connection,
+            MySqlDataReader reader = Utils.executeQuery(connection,
                 $"SELECT * FROM _client WHERE client_id = {ID}"
             );
 
@@ -192,8 +177,8 @@ namespace LIBDBGUI
 
         public void SearchByNameWasPressed(MySqlConnection connection, string name)
         {
-            MySqlDataReader reader = executeQuery(connection,
-                $"SELECT * FROM _client WHERE client_name REGEXP '^{name}$'"
+            MySqlDataReader reader = Utils.executeQuery(connection,
+                $"SELECT * FROM _client WHERE client_name REGEXP '^{name}$';"
             );
 
             DisplayQueryResult(reader);
@@ -281,6 +266,6 @@ namespace LIBDBGUI
             }
             
         }
-  
+
     }
 }

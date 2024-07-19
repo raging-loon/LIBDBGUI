@@ -4,6 +4,8 @@ using Org.BouncyCastle.Tls;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -12,7 +14,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using ZstdSharp.Unsafe;
 
-namespace LIBDBGUI
+namespace LIBDBGUI.BookManagement
 {
 
     /// <summary>
@@ -66,45 +68,44 @@ namespace LIBDBGUI
             if (!forceUpdate && m_tableIsPopulated)
                 return;
 
-            m_bookTable.Rows.Clear();
             
             MySqlCommand cmd = conn.CreateCommand();
             cmd.CommandText = $"SELECT * FROM books LIMIT {m_loadLimit};";
 
             MySqlDataReader reader = cmd.ExecuteReader();
 
-
-            while (reader.Read())
-            {
-                object[] newRow =
-                {
-                    reader.GetInt32     (BookTabs.ID),
-                    reader.GetString    (BookTabs.ISBN),
-                    reader.GetString    (BookTabs.NAME),
-                    reader.GetString    (BookTabs.AUTHOR),
-
-                    // TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO 
-                    // FIX THE DATABASE. DATE_PUBLISHED AND GENRE NEED TO BE SWITCHED
-                    // TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO 
-
-                    reader.GetString    (BookTabs.GENRE),
-                    reader.GetDateTime  (BookTabs.DATE_PUBLISHED).ToShortDateString(),
-                    reader.GetInt32     (BookTabs.TOTAL_COPIES),
-                    reader.GetInt32     (BookTabs.COPIES_OUT)
-                };
-
-                int nrIdx = m_bookTable.Rows.Add(newRow);
-                // mark the new row as read-only
-                m_bookTable.Rows[nrIdx].ReadOnly = true;
-
-            }
+            DisplayQueryResults(reader);
 
             reader.Close();
             //m_bookTable.Update();
             m_tableIsPopulated = true;
-
-
         }
+
+        private void DisplayQueryResults(MySqlDataReader reader)
+        {
+            Debug.Assert(!reader.IsClosed);
+            m_bookTable.Rows.Clear();
+            
+            while (reader.Read())
+            {
+
+                object[] newRow =
+                  {
+                    reader.GetInt32     (BookTabs.ID),
+                    reader.GetString    (BookTabs.ISBN),
+                    reader.GetString    (BookTabs.NAME),
+                    reader.GetString    (BookTabs.AUTHOR),
+                    reader.GetString    (BookTabs.GENRE),
+                    reader.GetDateTime  (BookTabs.DATE_PUBLISHED),
+                    reader.GetInt32     (BookTabs.TOTAL_COPIES),
+                    reader.GetInt32     (BookTabs.COPIES_OUT)
+                };
+                int newIdx = m_bookTable.Rows.Add(newRow);
+                m_bookTable.Rows[newIdx].ReadOnly = true;
+            }
+        }
+
+
         /// <summary>
         /// If the Cell to edit is NOT the ID tab,
         /// add the value to the cell edit state and mark the cell
@@ -165,10 +166,47 @@ namespace LIBDBGUI
             if(!update.update(conn))
             {
                 Utils.ShowError("Failed to update table", "Table update error");
+                // refresh if failed to restore the original value
+                LoadTable(conn, true);
             }
-
-            LoadTable(conn, true);
         }
+
+        /************************/
+        /*** Search Functions ***/
+        /************************/
+
+        // TODO: Refactor to get rid of code duplication
+        public void SearchByTitle(MySqlConnection conn, string title)
+        {
+            MySqlDataReader res = Utils.executeQuery(conn,
+                $"SELECT * FROM books WHERE book_name REGEXP '^{title}$';"
+            );
+
+            DisplayQueryResults(res);
+            res.Close();
+        }
+
+        public void SearchByISBN(MySqlConnection conn, string isbn)
+        {
+            MySqlDataReader res = Utils.executeQuery(conn,
+                $"SELECT * from books where book_isbn REGEXP '^{isbn}$';"
+            );
+
+            DisplayQueryResults(res);
+            res.Close();
+        }
+
+        public void SearchByAuthor(MySqlConnection conn, string author)
+        {
+            MySqlDataReader res = Utils.executeQuery(conn,
+                $"SELECT * from books where book_author REGEXP '^{author}$';"
+            );
+
+            DisplayQueryResults(res);
+            res.Close();
+        }
+
+
 
         /// <summary>
         /// Validate ISBN and DATE inputs
@@ -180,7 +218,7 @@ namespace LIBDBGUI
         {
             if (type == BookTabs.ISBN)
             {
-                if (!IsValidISBN(input))
+                if (!Utils.IsValidISBN(input))
                 {
                     Utils.ShowError(
                         $"'{input}' is not a valid ISBN",
@@ -226,62 +264,25 @@ namespace LIBDBGUI
             }
         }
 
-        private bool IsValidISBN(string isbn)
-        {
-            return Regex.IsMatch(isbn, "^(?=(?:\\D*\\d){10}(?:(?:\\D*\\d){3})?$)[\\d-]+$") ||
-                   Regex.IsMatch(isbn, "^([0-9]{9})\\-(\\w|\\d)$");
-        }
     
+
         private bool IsValidDate(string date)
         {
-            // Try the regex
-            if(Regex.IsMatch(date, "^\\d{1,2}(\\/|\\-|\\.)\\d{1,2}(\\/|\\-|\\.)\\d{4}$"))
+            string[] formats =
             {
-                // OK Now make sure the months and dates are valid.
-                char delim = date[date.Length - 5];
-                string[] dateParts = date.Split(delim);
-                if (dateParts.Length != 3)
-                    return false;
-                
-                int m = int.Parse(dateParts[0]);
-                int d = int.Parse(dateParts[1]);
-                int y = int.Parse(dateParts[2]);
-
-                if(m <= 0 || m > 12)
-                    return false;
-                
-                if (d <= 0)
-                    return false;
-                
-                int upperDayLimit = 30;
-                // if its Feb
-                if(m == 2)
-                {
-                    // If its a leap year
-                    if (y % 4 == 0 && (y % 100 != 0 || y % 400 == 0))
-                        upperDayLimit = 29;
-                    else
-                        upperDayLimit = 28;
-                }
-                else
-                {
-                    // why 
-                    // if the month has 31 days
-                    if (m == 1 || m == 3  || m == 5 || m == 7 || 
-                        m == 8 || m == 10 || m == 12)
-                        upperDayLimit = 31;
-                }
+                "MM.dd.yyyy",
+                "MM/dd/yyyy",
+                "MM-dd-yyyy",
+                "dd.MM.yyyy",
+                "dd/MM/yyyy",
+                "dd-MM-yyyy"
+            };
 
 
-                if(d > upperDayLimit) 
-                    return false;
-
-                return true;
-            }
-
-            return false;
-
+            DateTime outvar;
+            return DateTime.TryParseExact(date, formats, CultureInfo.InvariantCulture, DateTimeStyles.None, out outvar);
         }
+      
 
     }
 

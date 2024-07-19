@@ -5,8 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
-namespace LIBDBGUI
+namespace LIBDBGUI.BookManagement
 {
     internal class CheckOutManager
     {
@@ -26,7 +25,8 @@ namespace LIBDBGUI
         /// </summary>
         public bool checkout()
         {
-            if(!IsValidClientID())
+            
+            if(!Utils.IsValidClientID(m_connection, m_clientID))
             {
                 MessageBox.Show("Invalid Client ID", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
@@ -89,14 +89,5 @@ namespace LIBDBGUI
             return numCopiesLeft;
         }
 
-        private bool IsValidClientID()
-        {
-            MySqlCommand getClientCommand = new MySqlCommand();
-            
-            getClientCommand.Connection = m_connection;
-            getClientCommand.CommandText = $"SELECT * FROM _client where client_id = {m_clientID};";
-
-            return getClientCommand.ExecuteScalar() != null;
-        }
     }
 }

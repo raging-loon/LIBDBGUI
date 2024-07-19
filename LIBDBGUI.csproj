@@ -98,16 +98,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BookManager.cs" />
+    <Compile Include="BookManagement\BookManager.cs" />
+    <Compile Include="BookManagement\ReturnManager.cs" />
     <Compile Include="CellEditState.cs" />
     <Compile Include="CheckedOutBookManager.cs" />
-    <Compile Include="CheckOutManager.cs" />
-    <Compile Include="ClientForms\BookSearch.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ClientForms\BookSearch.Designer.cs">
-      <DependentUpon>BookSearch.cs</DependentUpon>
-    </Compile>
+    <Compile Include="BookManagement\CheckOutManager.cs" />
     <Compile Include="ClientForms\DeleteConfirmDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -119,6 +114,12 @@
     </Compile>
     <Compile Include="ClientForms\NewBookDialog.Designer.cs">
       <DependentUpon>NewBookDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ClientForms\ReturnForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ClientForms\ReturnForm.Designer.cs">
+      <DependentUpon>ReturnForm.cs</DependentUpon>
     </Compile>
     <Compile Include="DatabaseTableUpdate.cs" />
     <Compile Include="ClientForms\CheckOutForm.cs">
@@ -162,15 +163,15 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Utils.cs" />
-    <EmbeddedResource Include="ClientForms\BookSearch.resx">
-      <DependentUpon>BookSearch.cs</DependentUpon>
-    </EmbeddedResource>
+    <Compile Include="Utils\Utils.cs" />
     <EmbeddedResource Include="ClientForms\CheckOutForm.resx">
       <DependentUpon>CheckOutForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ClientForms\NewClient.resx">
       <DependentUpon>NewClient.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ClientForms\ReturnForm.resx">
+      <DependentUpon>ReturnForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
@@ -207,6 +208,8 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="DB\libdbms.sql" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

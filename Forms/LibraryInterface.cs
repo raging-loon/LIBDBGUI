@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using LIBDBGUI.ClientForms;
+using LIBDBGUI.BookManagement;
 using MySql.Data.MySqlClient;
 
 namespace LIBDBGUI
@@ -75,6 +76,18 @@ namespace LIBDBGUI
             m_clientManager.LoadTable(m_connection);
         }
 
+        private void ReturnBooksButton_Click(object sender, EventArgs e)
+        {
+            ReturnForm rf = new ReturnForm(m_connection);
+            rf.ShowDialog();
+
+            if (!rf.WasSubmitted)
+                return;
+
+            ReturnManager rm = new ReturnManager(rf.GetISBNs().ToArray(), rf.ClientID);
+            rm.doReturn(m_connection);
+            
+        }
         private void LibraryTabs_Selected(object sender, TabControlEventArgs e)
         {
             switch (e.TabPageIndex)
@@ -86,7 +99,26 @@ namespace LIBDBGUI
                 case 2: m_checkOutBookManager.LoadTable(m_connection); break;
             }
         }
+        /***********************************************************/
+        /*********** LibraryInterface Intercepted Events ***********/
+        /***********************************************************/
+        private void BookSearchViewClientsButton_Click(object sender, EventArgs e)
+        {
+            int bookID = (int)bookTable[0, bookTable.CurrentCell.RowIndex].Value;
 
+            m_checkOutBookManager.DisplayPerBookID(m_connection, bookID);
+
+            LibraryTabs.SelectedTab = CheckedOutBooksTab;
+        }
+
+        private void ClientsViewCheckedOutBooksButton_Click(object sender, EventArgs e)
+        {
+            int clientID = (int)ClientTable[0, ClientTable.CurrentCell.RowIndex].Value;
+
+            m_checkOutBookManager.DisplayPerClientID(m_connection, clientID);
+
+            LibraryTabs.SelectedTab = CheckedOutBooksTab;
+        }
         /******************************************************/
         /*********** ClientManager forwarded Events ***********/
         /******************************************************/
@@ -152,7 +184,7 @@ namespace LIBDBGUI
         /************************************************************/
         private void OutBooksRefreshButton_Click(object sender, EventArgs e)
         {
-            m_checkOutBookManager.LoadTable(m_connection);
+            m_checkOutBookManager.LoadTable(m_connection, true);
         }
 
 
@@ -160,6 +192,18 @@ namespace LIBDBGUI
         /****************************************************/
         /*********** BookManager forwarded Events ***********/
         /****************************************************/
+
+        private bool CheckBookSearchTextBoxIsNotEmpty()
+        {
+            if(BookSearchTextBox.Text.Length == 0)
+            {
+                BookSearchTextBox.Focus();
+                return false;
+
+            }
+            return true;
+        }
+
         private void bookTable_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             if(e.Button == MouseButtons.Right && e.ColumnIndex >= 0 && e.RowIndex >= 0)
@@ -176,5 +220,26 @@ namespace LIBDBGUI
         {
             m_bookManager.LoadTable(m_connection, true);
         }
+
+        private void BookSearchByName_Click(object sender, EventArgs e)
+        {
+            if (CheckBookSearchTextBoxIsNotEmpty())
+                m_bookManager.SearchByTitle(m_connection, BookSearchTextBox.Text);  
+        }
+
+        private void BookSearchISBN_Click(object sender, EventArgs e)
+        {
+            if(CheckBookSearchTextBoxIsNotEmpty())
+                m_bookManager.SearchByISBN(m_connection, BookSearchTextBox.Text);
+
+        }
+
+        private void BookSearchAuthor_Click(object sender, EventArgs e)
+        {
+            if (CheckBookSearchTextBoxIsNotEmpty())
+                m_bookManager.SearchByAuthor(m_connection, BookSearchTextBox.Text);
+        }
+
+  
     }
 }
