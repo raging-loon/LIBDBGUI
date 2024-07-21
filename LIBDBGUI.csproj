@@ -122,7 +122,7 @@
     <Compile Include="ClientForms\ReturnForm.Designer.cs">
       <DependentUpon>ReturnForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="DatabaseTableUpdate.cs" />
+    <Compile Include="Utils\DatabaseTableUpdate.cs" />
     <Compile Include="ClientForms\CheckOutForm.cs">
       <SubType>Form</SubType>
     </Compile>
